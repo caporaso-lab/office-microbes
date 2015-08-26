@@ -1,0 +1,75 @@
+split Libraries 16S
+Run 1
+split_libraries_fastq.py -i /scratch/jc33/office_analysis/office-fastqs/16s/run1_16s/Undetermined_S0_L001_R1_001.fastq -b /scratch/jc33/office_analysis/office-fastqs/16s/run1_16s/Undetermined_S0_L001_I1_001.fastq -m /scratch/jc33/office_analysis/barcode_maps/run1_16S_barcode_map.txt --rev_comp_mapping_barcodes -o /scratch/jc33/office_analysis/16s/split_lib/run1/split_lib_out
+
+count_seqs.py -i run1/split_lib_out/seqs.fna
+11298269  : run1/split_lib_out/seqs.fna (Sequence lengths (mean +/- std): 250.9956 +/- 0.4605)
+11298269  : Total
+
+Run 2
+split_libraries_fastq.py -i /scratch/jc33/office_analysis/office-fastqs/16s/run2_16s/Undetermined_S0_L001_R1_001.fastq -b /scratch/jc33/office_analysis/office-fastqs/16s/run2_16s/Undetermined_S0_L001_I1_001.fastq -m /scratch/jc33/office_analysis/barcode_maps/run2_16S_barcode_map.txt --rev_comp_mapping_barcodes -o /scratch/jc33/office_analysis/16s/split_lib/run2/split_lib_out
+
+count_seqs.py -i run2/split_lib_out/seqs.fna
+12258962  : run2/split_lib_out/seqs.fna (Sequence lengths (mean +/- std): 251.0000 +/- 0.0000)
+12258962  : Total
+
+Run 3
+split_libraries_fastq.py -i /scratch/jc33/office_analysis/office-fastqs/16s/run3_16s/Undetermined_S0_L001_R1_001.fastq.gz -b /scratch/jc33/office_analysis/office-fastqs/16s/run3_16s/Undetermined_S0_L001_I1_001.fastq.gz -m /scratch/jc33/office_analysis/barcode_maps/run3_16s_barcode_map.txt --rev_comp_mapping_barcodes -o /scratch/jc33/office_analysis/16s/split_lib/run3/split_lib_out
+
+count_seqs.py -i run3/split_lib_out/seqs.fna
+10203369  : run3/split_lib_out/seqs.fna (Sequence lengths (mean +/- std): 151.0000 +/- 0.0000)
+10203369  : Total
+
+Rerun
+srun split_libraries_fastq.py -i /scratch/jc33/office_analyis_add_replicates/split_lib_rer    un/ftp.igsb.anl.gov/jobs/f58775be0f7ed92d491edb8a174f39db/52214_fastqs/Undetermined_S0_L00    1_R1_001.fastq.gz -b /scratch/jc33/office_analyis_add_replicates/split_lib_rerun/ftp.igsb.    anl.gov/jobs/f58775be0f7ed92d491edb8a174f39db/52214_fastqs/Undetermined_S0_L001_I1_001.fas    tq.gz -m /scratch/jc33/office_analyis_add_replicates/split_lib_rerun/rerun_16s_barcode_map    .txt --rev_comp_mapping_barcodes -o /scratch/jc33/office_analyis_add_replicates/split_lib_    rerun/split_lib_out
+
+count_seqs.py -i seqs.fna
+895481  : seqs.fna (Sequence lengths (mean +/- std): 151.0000 +/- 0.0000)
+895481  : Total
+
+
+Trimmed read workflow
+code to trim reads
+>>> seqs_trimmed = open('seqs_trimmed.fna', 'w')
+>>> for seq in skbio.io.read('seqs.fna', format='fasta'):
+...     seqs_trimmed.write('>' + seq.id + ' ' + seq.description)
+...     seqs_trimmed.write('\n')
+...     seqs_trimmed.write(str(seq[:151]))
+...     seqs_trimmed.write('\n')
+
+Pick Open Reference OTUs
+cat /home/johnchase/projects/office_analysis/16s/params.txt
+pick_otus:enable_rev_strand_match True
+pick_otus:max_accepts 1
+pick_otus:max_rejects 8
+pick_otus:stepwords 8
+pick_otus:word_length
+make_emperor:ignore_missing_samples
+
+pick_open_reference_otus.py -i /home/johnchase/projects/office_analysis/16s/split_lib/run1/split_lib_out/seqs_trimmed.fna,/home/johnchase/projects/office_analysis/16s/split_lib/run2/split_lib_out/seqs_trimmed.fna,/home/johnchase/projects/office_analysis/16s/split_lib/run3/split_lib_out/seqs.fna -o /home/johnchase/projects/office_analysis/16s/pick_otus/pick_otus_trimmed_out/ -p /home/johnchase/projects/office_analysis/16s/params.txt -aO 29
+
+
+Pick Open Reference OTUs
+
+cat /scratch/jc33/params.txt
+pick_otus:enable_rev_strand_match True
+pick_otus:max_accepts 1
+pick_otus:max_rejects 8
+pick_otus:stepwords 8
+pick_otus:word_length
+make_emperor:ignore_missing_samples
+
+
+pick_open_reference_otus.py -i /scratch/jc33/office_analyis_add_replicates/split_lib_run123/run1/split_lib_out/seqs_trimmed.fna,/scratch/jc33/office_analyis_add_replicates/split_lib_run123/run2/split_lib_out/seqs_trimmed.fna,/scratch/jc33/office_analyis_add_replicates/split_lib_run123/run3/split_lib_out/seqs.fna,/scratch/jc33/office_analyis_add_replicates/split_lib_rerun/split_lib_out/seqs.fna -o /scratch/jc33/office_analyis_add_replicates/pick_otus/pick_otus_out -p /scratch/jc33/office_analyis_add_replicates/pick_otus/params.txt -aO 20
+
+cat /scratch/jc33/params.txt
+pick_otus:enable_rev_strand_match True
+pick_otus:max_accepts 1
+pick_otus:max_rejects 8
+pick_otus:stepwords 8
+pick_otus:word_length
+make_emperor:ignore_missing_samples
+
+
+Core Diversity Analysis
+core_diversity_analyses.py -i /scratch/jc33/office_analyis_add_replicates/pick_otus/pick_otus_out/otu_table_mc2_w_tax_no_pynast_failures.biom -o /scratch/jc33/office_analyis_add_replicates/core_div/core_div_out -m /scratch/jc33/office_analyis_add_replicates/master_map.txt -e 1000 -aO 29 -t /scratch/jc33/office_analyis_add_replicates/pick_otus/pick_otus_out/rep_set.tre -c City,OfficeNumber,PlateLocation,Material,Period

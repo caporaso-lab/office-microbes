@@ -1,4 +1,4 @@
-plit Libraries 16S
+split Libraries 16S
 Run 1
 split_libraries_fastq.py -i /scratch/jc33/office_analysis/office-fastqs/16s/run1_16s/Undetermined_S0_L001_R1_001.fastq -b /scratch/jc33/office_analysis/office-fastqs/16s/run1_16s/Undetermined_S0_L001_I1_001.fastq -m /scratch/jc33/office_analysis/barcode_maps/run1_16S_barcode_map.txt --rev_comp_mapping_barcodes -o /scratch/jc33/office_analysis/16s/split_lib/run1/split_lib_out
 

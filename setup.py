@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # ----------------------------------------------------------------------------
-# Copyright (c) 2014--, taxcompre development team.
+# Copyright (c) 2014--, office-microbes development team.
 #
 # Distributed under the terms of the Modified BSD License.
 #

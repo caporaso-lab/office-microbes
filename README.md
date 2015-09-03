@@ -2,7 +2,8 @@
 Notebooks and code for our Sloan office microbiome project.
 
 The draft paper is [here](https://docs.google.com/document/d/1Ps__dRQZOqjwMqYOSHAzqt7NXNUnJ2G6mVw4Jb-f-Pk/edit#). 
-
+The files necessary for analysis can be found in: `/home/office-microbes-files`
+Note: The files contained in this folder are read only 
 ## To get started using this code
  1. create a conda enviornment for the project: ``conda create -n office-microbes python=3.4 scikit-bio; source activate office-microbes``
  2. clone the repository: ``git clone git@github.com:gregcaporaso/office-microbes.git``

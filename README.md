@@ -1,7 +1,7 @@
 # Office microbes
 Notebooks and code for our Sloan office microbiome project.
 
-The draft paper is [here](https://docs.google.com/document/d/1Ps__dRQZOqjwMqYOSHAzqt7NXNUnJ2G6mVw4Jb-f-Pk/edit#). 
+The draft paper is [here](https://docs.google.com/document/d/1Ps__dRQZOqjwMqYOSHAzqt7NXNUnJ2G6mVw4Jb-f-Pk/edit#).  
 The files necessary for analysis can be found in: `/home/office-microbes-files`
 Note: The files contained in this folder are read only 
 ## To get started using this code

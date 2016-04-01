@@ -1,15 +1,10 @@
 # Office microbes
-Notebooks and code for our Sloan office microbiome project.
+Notebooks and code for our Sloan office microbiome project (pre-print [here](https://peerj.com/preprints/1797/), currently in press at mSystems)
 
-The draft paper is [here](https://docs.google.com/document/d/1Ps__dRQZOqjwMqYOSHAzqt7NXNUnJ2G6mVw4Jb-f-Pk/edit#).  
-The files necessary for analysis can be found on bacon in the following directory: `/home/office-microbes-files`  
-Note: The files contained in this folder are read only 
+The processed files used in these notebooks are available upon request (due to size, > 120GB). All raw data is publicly accessible in [ERA under accession number ERP014651](http://www.ebi.ac.uk/ena/data/view/ERP014651).
+ 
 ## To get started using this code
  1. create a conda enviornment for the project: ``conda create -n office-microbes python=3.4 scikit-bio; source activate office-microbes``
  2. clone the repository: ``git clone git@github.com:gregcaporaso/office-microbes.git``
  3. change to the resulting directory: ``cd office-microbes``
  4. run: ``pip install -e .``
- 5. create a directory where you'll work named after your GitHub username, e.g., ``mkdir gregcaporaso``
- 6. and change to that directory and start working on your IPython Notebooks. 
-
-The filepaths listed below will be useful for getting started, as these are generally the data files that you'll want to work with. 
